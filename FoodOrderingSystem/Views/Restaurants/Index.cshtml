@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Restaurant>
+
+<h1 class="alert alert-success text-center">Restaurants</h1>
+
+<a asp-controller="Restaurants" asp-action="GetCreateView" class="btn btn-success mb-1">Create New</a>
+
+<form method="get" asp-controller="Restaurants" asp-action="GetIndexView">
+    <div class="input-group">
+        <input type="text" name="search" value="@ViewBag.Search" />
+        <button type="submit" class="btn btn-secondary input-group-append"><i class="bi bi-search"></i></button>
+    </div>
+</form>
+
+
+@if (Model.Count() > 0)
+{
+    <table class="table table - bordered table - striped table - hover">
+        <thead>
+            <tr>
+                <th class="text-success">@Html.DisplayNameFor(r => r.Id)</th>
+                <th class="text-success">@Html.DisplayNameFor(r => r.Name)</th>
+                <th class="text-success">@Html.DisplayNameFor(r => r.Category)</th>
+                <th class="text-success">@Html.DisplayNameFor(r => r.AnnualBudget)</th>
+                <th class="text-success">@Html.DisplayNameFor(r => r.ImagePath)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Category</td>
+                    <td>@item.AnnualBudget</td>
+                    <td><img src="@item.ImagePath" style="width:100px;height:100px;" /></td>
+                    <td>
+                        <a asp-controller="Restaurants" asp-action="GetDetailsView" asp-route-id="@item.Id"
+                           class="btn btn-outline-primary"><i class="bi bi-list-ul"></i></a>
+                        <a asp-controller="Restaurants" asp-action="GetEditView" asp-route-id="@item.Id"
+                           class="btn btn-outline-success"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-controller="Restaurants" asp-action="GetDeleteView" asp-route-id="@item.Id"
+                           class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr><th colspan="3" style="text-align:right">Total</th><th>@Model.Sum(rest => rest.AnnualBudget)</th></tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <h1 class="alert alert-danger text-center">There is no Restaurants to Display.</h1>
+}
+<hr />
+
+<partial name="_TechSupportContact" />
+
+<hr />
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="card bg-primary mb-2 text-white text-center"
+             style="width:18rem;height:12rem;display:inline-block">
+            <div class="card-header">
+                @item.Name
+            </div>
+            <div class="card-body">
+                <img src="@item.ImagePath" style="width:150px;height:100px" class="card-img-top" />
+
+                <h5 class="card-title">@item.Category</h5>
+            </div>
+        </div>
+    }
+    <hr />
+    foreach (var item in Model)
+    {
+        <div class="card bg-transparent border-success mb-2 text-dark text-center"
+             style="width:18rem;height:12rem;display:inline-block">
+            <div class="card-header border-success bg-transparent">
+                @item.Name
+            </div>
+            <div class="card-body border-success bg-transparent">
+                @*<img src="@item.imagePath" class="card-img-top" style="object-fit" />*@
+                <h5 class="card-title">@item.Category</h5>
+                <div class="card-text">started at @item.StartDate.ToShortDateString()</div>
+            </div>
+            <div class="card-footer border-success bg-transparent">
+                @item.AnnualBudget.ToString("C0")
+            </div>
+        </div>
+    }
+
+}
+
+else
+{
+    <h1 class="alert alert-danger text-center">There is no Restaurants to Display.</h1>
+}

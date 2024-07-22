@@ -1,0 +1,12 @@
+﻿@model Restaurant
+
+<h1 class="alert alert-danger text-center">Are you sure you want to delete @Model.Name ?</h1>
+
+<partial name="_RestData" />
+
+<form class="col-4" method="post" asp-action="DeleteCurrent">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger mt-2">Delete</button>
+</form>
+
+<a asp-controller="Restaurants" asp-action="GetIndexView">Back to list</a>

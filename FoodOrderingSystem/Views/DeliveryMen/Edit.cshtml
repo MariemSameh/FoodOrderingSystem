@@ -1,0 +1,73 @@
+﻿@model DeliveryMan
+
+<h1 class="alert alert-success text-center">Edit @Model.Name</h1>
+
+<div class="row">
+    <form class="col-4" method="post" asp-controller="DeliveryMen" asp-action="EditCurrent" enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImagePath" />
+
+        <div>
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="YearsOfExperience"></label>
+            <input type="text" asp-for="YearsOfExperience" class="form-control" />
+            <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+
+        </div>
+        <div>
+            <label asp-for="Salary"></label>
+            <input type="number" asp-for="Salary" class="form-control" />
+            <span asp-validation-for="Salary" class="text-danger"></span>
+
+        </div>
+        <div>
+            <label asp-for="BirthDate"></label>
+            <input asp-for="BirthDate" class="form-control" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+
+        </div>
+        <div>
+            <label asp-for="IsActive"></label>
+            <input asp-for="IsActive" />
+        </div>
+
+        <div>
+            <label asp-for="RestaurantId"></label>
+            <select asp-for="RestaurantId" asp-items="@(new SelectList(ViewBag.AllRestaurants, "Id", "Name"))" class="form-control">
+                <option selected disabled>Select...</option>
+            </select>
+            <span asp-validation-for="RestaurantId" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="ImagePath"></label>
+            <input type="file" name="imageFormFile" id="imageFormFile" accept=".png,.jpg" class="form-control" onchange="SetImgSrc()" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Edit</button>
+
+    </form>
+
+    <img src="@Model.ImagePath" id="delImage" class="col-4 card" style="object-fit:contain" />
+
+</div>
+
+<a asp-controller="DeliveryMen" asp-action="GetIndexView">Back To List</a>
+
+@section Scripts{
+    <script>
+        function SetImgSrc() {
+            // var imageFormFileFirstFile = document.getElementById("imageFormFile").files[0];
+            // var imageFormFileUrl = window.URL.createObjectURL(imageFormFileFirstFile);
+            // document.getElementById("delImage").src = imageFormFileUrl;
+            document.getElementById("delImage").src = window.URL.createObjectURL(document.getElementById("imageFormFile").files[0]);
+        }
+    </script>
+}

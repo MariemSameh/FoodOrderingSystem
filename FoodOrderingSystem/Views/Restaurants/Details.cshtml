@@ -1,0 +1,9 @@
+﻿@model Restaurant
+
+<h1 class="alert alert-success text-center">@Model.Name Details</h1>
+
+<partial name="_RestData" />
+
+<a asp-controller="Restaurants" asp-action="GetIndexView">Back to list</a>
+<hr />
+<partial name="_TechSupportContact" />

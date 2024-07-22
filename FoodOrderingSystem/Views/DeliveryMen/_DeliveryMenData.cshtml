@@ -1,0 +1,32 @@
+﻿@{
+    DeliveryMan deliveryMan = (DeliveryMan)ViewBag.CurrentDelivery;
+}
+
+
+<div class="row">
+    <dl class="col-6 row">
+        <dt class="col-2">Id</dt>
+        <dd class="col-10">@Model.Id</dd>
+
+        <dt class="col-2">Name</dt>
+        <dd class="col-10">@Model.Name</dd>
+
+        <dt class="col-2">Years Of Experience</dt>
+        <dd class="col-10">@Model.YearsOfExperience</dd>
+
+        <dt class="col-2">Salary</dt>
+        <dd class="col-10">@Model.Salary</dd>
+
+        <dt class="col-2">Birth Date</dt>
+        <dd class="col-10">@Model.BirthDate.ToShortDateString()</dd>
+
+        <dt class="col-2">Is Active</dt>
+        <dd class="col-10">@Model.IsActive</dd>
+
+        <dt class="col-2">Restaurant</dt>
+        <dd class="col-10">@Model.Restaurant.Name</dd>
+    </dl>
+
+    <img src="@Model.ImagePath" class="card col-6" style="width:200px;height:200px" />
+
+</div>
